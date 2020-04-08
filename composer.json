@@ -1,0 +1,11 @@
+{
+    "name": "romul/php-small-framework",
+    "description": "Create a small framework with php",
+    "authors": [
+        {
+            "name": "Romulo Sousa",
+            "email": "romulosousa27@hotmail.com"
+        }
+    ],
+    "require": {}
+}
