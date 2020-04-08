@@ -7,5 +7,10 @@
             "email": "romulosousa27@hotmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\Project\\": "src"
+        }
+    }
 }
