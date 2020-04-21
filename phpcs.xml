@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ruleset name="PHP_CodeSniffer">
+    <description>The decoding standard for PHP, codeSniffer</description>
+    <file>src</file>
+
+    <rule ref="PSR2"/>
+</ruleset>
