@@ -9,6 +9,11 @@ class RouterCollection
 {
     protected $collection = [];
 
+    /**
+     * @param string $method
+     * @param string $path
+     * @param $callback
+     */
     public function add(string $method, string $path, $callback)
     {
         if (!isset($this->collection[$method])) {
