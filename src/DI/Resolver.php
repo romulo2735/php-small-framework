@@ -3,7 +3,6 @@
 
 namespace App\Project\DI;
 
-
 class Resolver
 {
     private $dependencies;
@@ -24,12 +23,12 @@ class Resolver
         $this->dependencies = $dependencies;
         $class = new \ReflectionClass($class);
 
-        if (!$class->isInstantiable()){
+        if (!$class->isInstantiable()) {
             throw new \Exception("{$class}class is not instaciable");
         }
 
         $constructor = $class->getConstructor();
-        if (!$constructor){
+        if (!$constructor) {
             return new $class->name;
         }
 
@@ -42,12 +41,12 @@ class Resolver
     private function resolveParameters($paramters)
     {
         $dependecies = [];
-        foreach ($paramters as $paramter){
+        foreach ($paramters as $paramter) {
             $dependency = $paramter->getClass();
 
-            if ($dependency){
+            if ($dependency) {
                 $dependecies[] = $this->class($dependency->name, $this->dependencies);
-            }else{
+            } else {
                 $dependecies[] = $this->getDependencies($paramter);
             }
         }
@@ -57,11 +56,11 @@ class Resolver
 
     private function getDependencies($parameter)
     {
-        if (isset($this->dependencies[$parameter->name])){
+        if (isset($this->dependencies[$parameter->name])) {
             return $this->dependencies[$parameter->name];
         }
 
-        if ($parameter->isDefaultValueAvailable()){
+        if ($parameter->isDefaultValueAvailable()) {
             return $parameter->getDefaultvalue();
         }
 
