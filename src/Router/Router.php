@@ -13,8 +13,8 @@ class Router
     public function __construct(string $path, string $method)
     {
         $this->collection = new RouterCollection();
-        $this->path = $path;
         $this->method = $method;
+        $this->path = $path;
     }
 
     public function get($path, $fn)
@@ -37,18 +37,17 @@ class Router
      */
     private function checkUrl(string $toFind, $subject)
     {
-        preg_match_all('/\{([^\}]*)/', $toFind, $variables);
+        preg_match_all('/\{([^\}]*)\}/', $toFind, $variables);
 
         $regex = str_replace('/', '\/', $toFind);
 
-        foreach ($variables[1] as $key => $variable ) {
+        foreach ($variables[1] as $key => $variable) {
             $as = explode(':', $variable);
-            $replament = $as[1] ?? '([a-zA-Z0-9\-\_\ ]+)';
-            $regex = str_replace($variables[$key], $replament, $regex);
+            $replacement = $as[1] ?? '([a-zA-Z0-9\-\_\ ]+)';
+            $regex = str_replace($variables[$key], $replacement, $regex);
         }
-
         $regex = preg_replace('/{([a-zA-Z]+)}/', '([a-zA-Z0-9+])', $regex);
-        $result = preg_match('/^'. $regex.'$/', $subject, $params);
+        $result = preg_match('/^' . $regex . '$/', $subject, $params);
 
         return compact('result', 'params');
     }
@@ -60,12 +59,12 @@ class Router
         foreach ($data as $key => $value) {
             $result = $this->checkUrl($key, $this->path);
             $callback = $value;
-            if ($result['result']){
+            if ($result['result']) {
                 break;
             }
         }
 
-        if (!$result['result']){
+        if (!$result['result']) {
             $callback = null;
         }
 
